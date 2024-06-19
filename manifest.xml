@@ -8,15 +8,15 @@
   <Description DefaultValue="A template to get started."/>
   <IconUrl DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <SupportUrl DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/help"/>
   <AppDomains>
-    <AppDomain>https://peytonchang.github.io</AppDomain>
+    <AppDomain>https://peytonchang.github.io/DialogApiAddInRepo</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Workbook"/>
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/"/>
+    <SourceLocation DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo"/>
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
