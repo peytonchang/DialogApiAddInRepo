@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dialog</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+<body>
+    <h1>This is the dialog content</h1>
+    
+    <label for="number-select">Choose a number:</label>
+    <select id="number-select">
+        <!-- JavaScript will populate the options here -->
+    </select>
+
+    <br><br> <!-- Line breaks for better spacing -->
+
+    <label for="text-box">Textbox:</label>
+    <input type="text" id="text-box" placeholder="Type here">
+
+    <br><br> <!-- Line breaks for better spacing -->
+
+    <button id="capture-btn">Capture</button>
+    <button id="paste-btn">Paste</button>
+
+    <script>
+        // Ensure Office.js is loaded before running any Office-related code
+        Office.onReady(function (info) {
+            console.dir(Office.context.ui); // Logs the Office context for debugging
+
+            // Populate the drop-down menu with numbers 1 to 10
+            const select = document.getElementById('number-select');
+            for (let i = 1; i <= 10; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                select.appendChild(option);
+            }
+
+            // Add event listeners for the buttons
+            document.getElementById('capture-btn').addEventListener('click', function() {
+                console.log('Capture button clicked');
+                Office.context.ui.messageParent('capture');
+            });
+
+            document.getElementById('paste-btn').addEventListener('click', function() {
+                const textBoxValue = document.getElementById('text-box').value;
+                console.log('Paste button clicked with value: ', textBoxValue);
+                Office.context.ui.messageParent('paste:' + textBoxValue);
+            });
+
+            // Function to receive messages from the parent page
+            Office.context.ui.addHandlerAsync(Office.EventType.DialogParentMessageReceived, function(arg) {
+                console.log('Received message from parent: ', arg.message);
+                try {
+                    const data = JSON.parse(arg.message);
+                    if (data.value !== undefined) {
+                        document.getElementById('text-box').value = data.value; // Set the text box value
+                    } else {
+                        console.error("Received data is missing 'value' key.");
+                    }
+                } catch (e) {
+                    console.error('Error parsing message from parent:', e);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
