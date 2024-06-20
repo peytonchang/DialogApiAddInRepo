@@ -1,14 +1,27 @@
 (function () {
     let currentDialog = null;
+    let loggedIn = false;
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
-            document.getElementById('loginButton').addEventListener('click', login);
+            if (loggedIn) {
+                document.getElementById('loginButton').addEventListener('click', login);
+            } else {
+                document.getElementById('open-dialog-button').addEventListener('click', login);
+            }
         }
     });
   
     function login() {
-        
+        const enteredPassword = document.getElementById('passwordInput').value;
+        const universalPassword = "BlueSage123";
+
+        if (enteredPassword === universalPassword) {
+            loggedIn = true;
+            window.location.href = 'openDialog.html';
+        } else {
+            document.getElementById('errorMessage').style.display = 'block';
+        }
     }
 
     function openDialog() {
