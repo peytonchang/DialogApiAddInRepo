@@ -3,7 +3,7 @@
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
-            document.getElementById('open-dialog-btn').addEventListener('click', openDialog);
+            document.getElementById('loginButton').addEventListener('click', openDialog);
         }
     });
   
