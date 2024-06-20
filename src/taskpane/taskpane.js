@@ -3,10 +3,14 @@
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
-            document.getElementById('loginButton').addEventListener('click', openDialog);
+            document.getElementById('loginButton').addEventListener('click', login);
         }
     });
   
+    function login() {
+        
+    }
+
     function openDialog() {
         console.dir(Office.context.ui);  // Logs the Office context UI for debugging
         // if (currentDialog) {
