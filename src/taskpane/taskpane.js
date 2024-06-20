@@ -30,8 +30,8 @@
 
         if (enteredPassword === universalPassword) {
             loggedIn = true;
+            window.location.href = 'openDialog.html';
             checkLoginState();
-            // window.location.href = 'openDialog.html';
             // const openDialogButton = document.getElementById('open-dialog-btn');
             // if (openDialogButton) {
             //     openDialogButton.addEventListener('click', openDialog);
