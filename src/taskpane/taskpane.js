@@ -21,11 +21,13 @@
             console.log("made it here 2");
             if (!window.location.pathname.endsWith('home.html')) {
                 window.location.href = 'home.html';
-            // Ensure the open-dialog-btn exists before adding an event listener
-            const openDialogButton = document.getElementById('open-dialog-btn');
-            if (openDialogButton) {
-                openDialogButton.addEventListener('click', openDialog);
-                console.log("made it here 5")
+            } else {
+                // Ensure the open-dialog-btn exists before adding an event listener
+                const openDialogButton = document.getElementById('open-dialog-btn');
+                if (openDialogButton) {
+                    openDialogButton.addEventListener('click', openDialog);
+                    console.log("made it here 5");
+                }
             }
         }
     }
@@ -38,7 +40,7 @@
             console.log("made it here 3");
             localStorage.setItem('loggedIn', 'true');
             window.location.href = 'home.html';
-            // checkLoginState();
+            checkLoginState();
             // const openDialogButton = document.getElementById('open-dialog-btn');
             // if (openDialogButton) {
             //     openDialogButton.addEventListener('click', openDialog);
