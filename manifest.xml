@@ -53,6 +53,10 @@
                     <TaskpaneId>ButtonId1</TaskpaneId>
                     <SourceLocation resid="Taskpane.Url"/>
                   </Action>
+                  <Action xsi:type="ShowHome">
+                    <TaskpaneId>ButtonId2</TaskpaneId>
+                    <SourceLocation resid="Home.Url"/>
+                  </Action>
                 </Control>
               </Group>
             </OfficeTab>
@@ -70,7 +74,7 @@
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
         <bt:Url id="Commands.Url" DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/src/commands/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/src/taskpane/taskpane.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/src/taskpane/home.html"/>
+        <bt:Url id="Home.Url" DefaultValue="https://peytonchang.github.io/DialogApiAddInRepo/src/taskpane/home.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
