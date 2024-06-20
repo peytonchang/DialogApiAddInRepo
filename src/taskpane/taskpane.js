@@ -4,10 +4,10 @@
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
-            if (loggedIn) {
+            if (!loggedIn) {
                 document.getElementById('loginButton').addEventListener('click', login);
             } else {
-                document.getElementById('open-dialog-button').addEventListener('click', login);
+                document.getElementById('open-dialog-button').addEventListener('click', openDialog);
             }
         }
     });
