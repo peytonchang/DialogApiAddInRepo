@@ -33,7 +33,7 @@
         if (enteredPassword === universalPassword) {
             console.log("made it here 3");
             loggedIn = true;
-            window.location.href = 'openDialog.html';
+            window.location.href = 'home.html';
             checkLoginState();
             // const openDialogButton = document.getElementById('open-dialog-btn');
             // if (openDialogButton) {
