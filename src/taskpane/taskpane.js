@@ -9,6 +9,7 @@
     });
 
     function checkLoginState() {
+        console.log("loggedIn val: " + loggedIn)
         if (!loggedIn) {
             console.log("made it here 1");
             // Ensure the loginButton exists before adding an event listener
@@ -22,6 +23,7 @@
             const openDialogButton = document.getElementById('open-dialog-btn');
             if (openDialogButton) {
                 openDialogButton.addEventListener('click', openDialog);
+                console.log("made it here 5")
             }
         }
     }
