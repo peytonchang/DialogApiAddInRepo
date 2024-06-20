@@ -10,12 +10,14 @@
 
     function checkLoginState() {
         if (!loggedIn) {
+            logger.log("made it here 1");
             // Ensure the loginButton exists before adding an event listener
             const loginButton = document.getElementById('loginButton');
             if (loginButton) {
                 loginButton.addEventListener('click', login);
             }
         } else {
+            logger.log("made it here 2");
             // Ensure the open-dialog-btn exists before adding an event listener
             const openDialogButton = document.getElementById('open-dialog-btn');
             if (openDialogButton) {
@@ -29,6 +31,7 @@
         const universalPassword = "BlueSage123";
 
         if (enteredPassword === universalPassword) {
+            logger.log("made it here 3");
             loggedIn = true;
             window.location.href = 'openDialog.html';
             checkLoginState();
@@ -37,17 +40,13 @@
             //     openDialogButton.addEventListener('click', openDialog);
             // }
         } else {
+            logger.log("made it here 4");
             document.getElementById('errorMessage').style.display = 'block';
         }
     }
 
     function openDialog() {
-        console.dir(Office.context.ui);  // Logs the Office context UI for debugging
-        // if (currentDialog) {
-        //     console.log('Dialog already open.');
-        //     return;
-        // }
-  
+
         const dialogUrl = 'https://peytonchang.github.io/DialogApiAddInRepo/src/dialog.html'; // Adjust as necessary
         Office.context.ui.displayDialogAsync(dialogUrl, { height: 50, width: 50 }, (result) => {
             if (result.status === Office.AsyncResultStatus.Failed) {
