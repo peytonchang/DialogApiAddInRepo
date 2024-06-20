@@ -4,13 +4,25 @@
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
-            if (!loggedIn) {
-                document.getElementById('loginButton').addEventListener('click', login);
-            } else {
-                document.getElementById('open-dialog-button').addEventListener('click', openDialog);
-            }
+            checkLoginState();
         }
     });
+
+    function checkLoginState() {
+        if (!loggedIn) {
+            // Ensure the loginButton exists before adding an event listener
+            const loginButton = document.getElementById('loginButton');
+            if (loginButton) {
+                loginButton.addEventListener('click', login);
+            }
+        } else {
+            // Ensure the open-dialog-btn exists before adding an event listener
+            const openDialogButton = document.getElementById('open-dialog-btn');
+            if (openDialogButton) {
+                openDialogButton.addEventListener('click', openDialog);
+            }
+        }
+    }
   
     function login() {
         const enteredPassword = document.getElementById('passwordInput').value;
