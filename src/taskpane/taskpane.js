@@ -1,31 +1,58 @@
 (function () {
-  let currentDialog = null;
-
-  Office.onReady((info) => {
-      if (info.host === Office.HostType.Excel) {
-          document.getElementById('open-dialog-btn').addEventListener('click', openDialog);
+    let currentDialog = null;
+    let loggedIn = false; // Flag to check login status
+  
+    Office.onReady((info) => {
+        if (info.host === Office.HostType.Excel) {
+            document.getElementById('loginButton').addEventListener('click', login);
+            document.getElementById('open-dialog-btn').addEventListener('click', openDialog);
+            checkLoginState();
+        }
+    });
+  
+    function login() {
+      const passwordInput = document.getElementById('passwordInput').value;
+      const universalPassword = "BlueSage"; // Set your universal password
+  
+      if (passwordInput === universalPassword) {
+          loggedIn = true;
+          localStorage.setItem('loggedIn', 'true');
+          document.getElementById('loginSection').style.display = 'none';
+          document.getElementById('mainContent').style.display = 'block';
+          console.log('Login successful.');
+      } else {
+          alert("Incorrect password. Please try again.");
       }
-  });
-
-  function openDialog() {
-      console.dir(Office.context.ui);  // Logs the Office context UI for debugging
-      // if (currentDialog) {
-      //     console.log('Dialog already open.');
-      //     return;
-      // }
-
-      const dialogUrl = 'https://peytonchang.github.io/DialogApiAddInRepo/src/dialog.html'; // Adjust as necessary
-      Office.context.ui.displayDialogAsync(dialogUrl, { height: 50, width: 50 }, (result) => {
-          if (result.status === Office.AsyncResultStatus.Failed) {
-              console.error('Failed to open dialog: ' + result.error.message);
-          } else {
-              currentDialog = result.value;
-              console.log('Dialog opened successfully.');
-              currentDialog.addEventHandler(Office.EventType.DialogMessageReceived, processMessageFromDialog);
-              currentDialog.addEventHandler(Office.EventType.DialogEventReceived, handleDialogEvent);
-          }
-      });
-  }
+    }
+  
+    function checkLoginState() {
+        var storedLoggedIn = localStorage.getItem('loggedIn') === 'true';
+        if (storedLoggedIn) {
+            loggedIn = true;
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        }
+    }
+  
+    function openDialog() {
+        if (!loggedIn) {
+            alert("Please log in first.");
+            return;
+        }
+  
+        console.dir(Office.context.ui);  // Logs the Office context UI for debugging
+        const dialogUrl = 'https://peytonchang.github.io/DialogApiAddInRepo/src/dialog.html';
+        Office.context.ui.displayDialogAsync(dialogUrl, { height: 50, width: 50 }, (result) => {
+            if (result.status === Office.AsyncResultStatus.Failed) {
+                console.error('Failed to open dialog: ' + result.error.message);
+            } else {
+                currentDialog = result.value;
+                console.log('Dialog opened successfully.');
+                currentDialog.addEventHandler(Office.EventType.DialogMessageReceived, processMessageFromDialog);
+                currentDialog.addEventHandler(Office.EventType.DialogEventReceived, handleDialogEvent);
+            }
+        });
+    }
 
   function processMessageFromDialog(arg) {
       const message = arg.message;
