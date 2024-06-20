@@ -3,26 +3,25 @@
     let loggedIn = false; // Flag to check login status
   
     Office.onReady((info) => {
+        // Ensures the add-in initializes correctly depending on the host
         if (info.host === Office.HostType.Excel) {
+            // Add event listener to login button
             document.getElementById('loginButton').addEventListener('click', login);
-            document.getElementById('open-dialog-btn').addEventListener('click', openDialog);
-            checkLoginState();
         }
     });
-  
+    
     function login() {
-      const passwordInput = document.getElementById('passwordInput').value;
-      const universalPassword = "BlueSage"; // Set your universal password
-  
-      if (passwordInput === universalPassword) {
-          loggedIn = true;
-          localStorage.setItem('loggedIn', 'true');
-          document.getElementById('loginSection').style.display = 'none';
-          document.getElementById('mainContent').style.display = 'block';
-          console.log('Login successful.');
-      } else {
-          alert("Incorrect password. Please try again.");
-      }
+        const passwordInput = document.getElementById('passwordInput').value;
+        const universalPassword = "BlueSage"; // Set your universal password
+    
+        if (passwordInput === universalPassword) {
+            // Hide login section and show main content upon successful login
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            console.log('Login successful.');
+        } else {
+            alert("Incorrect password. Please try again.");
+        }
     }
   
     function checkLoginState() {

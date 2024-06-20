@@ -5,18 +5,19 @@
     <title>Task Pane</title>
     <style>
         #mainContent {
-            display: none;
+            display: none; /* Initially hidden */
         }
     </style>
 </head>
 <body>
-    <!-- Login Section -->
+    <!-- Login Section - Initially visible -->
     <div id="loginSection">
+        <label for="passwordInput">Password:</label>
         <input type="password" id="passwordInput" placeholder="Enter Password">
         <button id="loginButton">Login</button>
     </div>
 
-    <!-- Main Content Section -->
+    <!-- Main Content Section - Initially hidden -->
     <div id="mainContent">
         <button id="open-dialog-btn">Open Dialog</button>
     </div>
