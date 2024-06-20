@@ -3,33 +3,17 @@
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
-            document.getElementById('loginButton')?.addEventListener('click', login);
-            checkLoginState();
+            document.getElementById('open-dialog-btn').addEventListener('click', openDialog);
         }
     });
-    
-    function checkLoginState() {
-        const loggedIn = localStorage.getItem('loggedIn') === 'true';
-        if (!loggedIn && window.location.pathname.endsWith('taskpane.html')) {
-            window.location.href = 'login.html';
-        } else if (loggedIn && window.location.pathname.endsWith('login.html')) {
-            window.location.href = 'taskpane.html';
-        }
-    }
-    
-    function login() {
-        const passwordInput = document.getElementById('passwordInput').value;
-        const universalPassword = "BlueSage123"; // Set your universal password
-    
-        if (passwordInput === universalPassword) {
-            localStorage.setItem('loggedIn', 'true');
-            window.location.href = 'taskpane.html'; // Redirect to the main content page
-        } else {
-            document.getElementById('errorMessage').style.display = 'block';
-        }
-    }
-    
+  
     function openDialog() {
+        console.dir(Office.context.ui);  // Logs the Office context UI for debugging
+        // if (currentDialog) {
+        //     console.log('Dialog already open.');
+        //     return;
+        // }
+  
         const dialogUrl = 'https://peytonchang.github.io/DialogApiAddInRepo/src/dialog.html'; // Adjust as necessary
         Office.context.ui.displayDialogAsync(dialogUrl, { height: 50, width: 50 }, (result) => {
             if (result.status === Office.AsyncResultStatus.Failed) {
@@ -42,11 +26,11 @@
             }
         });
     }
-    
+  
     function processMessageFromDialog(arg) {
         const message = arg.message;
         console.log('Message from dialog: ', message);
-    
+  
         if (message === 'capture') {
             Excel.run(async (context) => {
                 console.log('Processing capture request');
@@ -56,8 +40,10 @@
                 await context.sync();
                 const cellValue = cell.values[0][0];
                 console.log('Captured value from A1: ', cellValue);
+                // Send the captured value back to the dialog
                 if (currentDialog) {
                     console.log('Sending value to dialog: ', cellValue);
+                    console.dir(currentDialog);
                     currentDialog.messageChild(JSON.stringify({ value: cellValue }));
                 } else {
                     console.error('No dialog instance found.');
@@ -78,13 +64,11 @@
             });
         }
     }
-    
+  
     function handleDialogEvent(event) {
         if (event.type === "dialogClosed") {
             currentDialog = null;
             console.log('Dialog closed.');
         }
     }
-    
   })();
-  
