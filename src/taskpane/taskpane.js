@@ -1,6 +1,5 @@
 (function () {
     let currentDialog = null;
-    let loggedIn = false;
   
     Office.onReady((info) => {
         if (info.host === Office.HostType.Excel) {
@@ -9,6 +8,7 @@
     });
 
     function checkLoginState() {
+        const loggedIn = localStorage.getItem('loggedIn') === 'true';
         console.log("loggedIn val: " + loggedIn)
         if (!loggedIn) {
             console.log("made it here 1");
@@ -34,7 +34,7 @@
 
         if (enteredPassword === universalPassword) {
             console.log("made it here 3");
-            loggedIn = true;
+            localStorage.setItem('loggedIn', 'true');
             window.location.href = 'home.html';
             checkLoginState();
             // const openDialogButton = document.getElementById('open-dialog-btn');
