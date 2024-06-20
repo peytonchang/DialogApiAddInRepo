@@ -19,7 +19,8 @@
             }
         } else {
             console.log("made it here 2");
-            window.location.href = 'home.html';
+            if (!window.location.pathname.endsWith('home.html')) {
+                window.location.href = 'home.html';
             // Ensure the open-dialog-btn exists before adding an event listener
             const openDialogButton = document.getElementById('open-dialog-btn');
             if (openDialogButton) {
@@ -36,7 +37,8 @@
         if (enteredPassword === universalPassword) {
             console.log("made it here 3");
             localStorage.setItem('loggedIn', 'true');
-            checkLoginState();
+            window.location.href = 'home.html';
+            // checkLoginState();
             // const openDialogButton = document.getElementById('open-dialog-btn');
             // if (openDialogButton) {
             //     openDialogButton.addEventListener('click', openDialog);
